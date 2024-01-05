@@ -29,25 +29,15 @@ jobs:
 
       - name: Install Cross in spore-contract directory
         run: |
-          current_directory=$(pwd)
-          echo "Current Directory: $current_directory"
-          adds=$(ls)
-          echo "Current Directory: $adds"
           cd spore_devenv
+          cd spore-contract
           cargo install cross --git https://github.com/cross-rs/cross
-          cd ..
-          cd ..
 
       - name: Install Capsule in spore-contract directory
-        run: |
-          cd spore_devenv/spore-contract
-          cargo install ckb-capsule --git https://github.com/nervosnetwork/capsule.git --tag v0.10.2
-          cd ..
-          cd ..
+        run: cargo install ckb-capsule --git https://github.com/nervosnetwork/capsule.git --tag v0.10.2
 
       - name: Build contracts
-        run: |
-          cd spore_devenv/spore-contract
+        run:
           capsule build --release
           cd ..
 
