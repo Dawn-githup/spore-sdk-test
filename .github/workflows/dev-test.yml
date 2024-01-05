@@ -79,13 +79,20 @@ jobs:
         run: sleep 5
 
       - name: Deploy Test
-        run: npm run test:deploy
+        run: |
+          cd spore_devenv
+          npm run test:deploy
+          cd ..
 
       - name: e2e Test
-        run: npm run test:e2e
+        run: |
+          cd spore_devenv
+          npm run test:e2e
+          cd ..
 
       - name: Run move_file.sh
         run: |
+          cd spore_devenv
           sh move_file.sh
           cd ..
 
