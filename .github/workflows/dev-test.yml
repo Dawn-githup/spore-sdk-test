@@ -28,7 +28,7 @@ jobs:
         run: sh get-latest-pr.sh
 
       - name: Run prepare.sh
-        run:
+        run: |
           cd spore_devenv
           sh prepare.sh
 
