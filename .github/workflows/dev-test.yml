@@ -102,8 +102,10 @@ jobs:
           cd spore-sdk
           npm install
 
-      - name: Run Dev Test
-        run: |
-          cd packages
-          cd core
-          npm run test:dev
+      - name: Change to packages/core directory
+        run: cd packages/core
+        working-directory: ${{ github.workspace }}
+
+      - name: Run npm test:dev
+        run: npm run test:dev
+        working-directory: ${{ github.workspace }}
