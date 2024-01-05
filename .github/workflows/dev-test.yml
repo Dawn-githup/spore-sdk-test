@@ -27,23 +27,21 @@ jobs:
       - name: Run get-latest-pr.sh
         run: sh get-latest-pr.sh
 
+      - name: Run prepare.sh
+        run:
+          cd spore_devenv
+          sh prepare.sh
+
       - name: Install Cross in spore-contract directory
         run: |
-          sleep 2
-          cd spore_devenv
-          sleep 1
           cd spore-contract
           cargo install cross --git https://github.com/cross-rs/cross
 
       - name: Install Capsule in spore-contract directory
-        run: |
-          sleep 2
-          cargo install ckb-capsule --git https://github.com/nervosnetwork/capsule.git --tag v0.10.2
+        run: cargo install ckb-capsule --git https://github.com/nervosnetwork/capsule.git --tag v0.10.2
 
       - name: Build contracts
-        run:
-          sleep 2
-          capsule build --release
+        run: capsule build --release
           cd ..
 
       - name: Install Dependencies
