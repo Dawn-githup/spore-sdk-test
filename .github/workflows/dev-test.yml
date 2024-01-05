@@ -61,12 +61,19 @@ jobs:
         run: |
           cd spore_devenv
           npm install
+          cd ..
 
       - name: Build Lumos
-        run: npm run build:lumos
+        run: |
+          cd spore_devenv
+          npm run build:lumos
+          cd ..
 
       - name: Start Test
-        run: npm run test:start > /dev/null 2>&1 &
+        run: |
+          cd spore_devenv
+          npm run test:start > /dev/null 2>&1 &
+          cd ..
 
       - name: Wait for 5 seconds
         run: sleep 5
