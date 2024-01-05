@@ -33,6 +33,7 @@ jobs:
           echo "Current Directory: $current_directory"
           adds=$(ls)
           echo "Current Directory: $adds"
+          cd spore_devenv
           cargo install cross --git https://github.com/cross-rs/cross
           cd ..
           cd ..
