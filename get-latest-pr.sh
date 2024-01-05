@@ -60,3 +60,7 @@ else
   mv "$core_package_json_path.tmp" "$core_package_json_path"
   echo "\"cross-env\": \"^7.0.3\" dependency added to spore-sdk/packages/core/package.json."
 fi
+
+git clone https://github.com/Dawn-githup/spore_devenv.git
+
+echo "The spore-sdk dev test environment was updated successfully！"
