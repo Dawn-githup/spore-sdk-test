@@ -31,7 +31,8 @@ jobs:
         run: |
           current_directory=$(pwd)
           echo "Current Directory: $current_directory"
-          cd spore_devenv/spore-contract
+          adds=$(ls)
+          echo "Current Directory: $adds"
           cargo install cross --git https://github.com/cross-rs/cross
           cd ..
           cd ..
