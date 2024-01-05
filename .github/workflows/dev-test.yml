@@ -31,9 +31,11 @@ jobs:
         run: |
           cd spore_devenv
           sh prepare.sh
+          cd ..
 
       - name: Install Cross in spore-contract directory
         run: |
+          cd spore_devenv
           cd spore-contract
           cargo install cross --git https://github.com/cross-rs/cross
           cd ..
