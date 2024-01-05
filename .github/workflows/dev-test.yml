@@ -1,1 +1,82 @@
+name: spore_devnet_test
 
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+  schedule:
+    - cron: '50 22 * * *' # Triggered every morning at 06:30 am (UTC time)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.14'
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Run get-latest-pr.sh
+        run: sh get-latest-pr.sh
+
+      - name: Install Cross in spore-contract directory
+        run: |
+          cd spore_devenv/spore-contract
+          cargo install cross --git https://github.com/cross-rs/cross
+          cd ..
+          cd ..
+
+      - name: Install Capsule in spore-contract directory
+        run: |
+          cd spore_devenv/spore-contract
+          cargo install ckb-capsule --git https://github.com/nervosnetwork/capsule.git --tag v0.10.2
+          cd ..
+          cd ..
+
+      - name: Build contracts
+        run: |
+          cd spore_devenv/spore-contract
+          capsule build --release
+          cd ..
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Lumos
+        run: npm run build:lumos
+
+      - name: Start Test
+        run: npm run test:start > /dev/null 2>&1 &
+
+      - name: Wait for 5 seconds
+        run: sleep 5
+
+      - name: Deploy Test
+        run: npm run test:deploy
+
+      - name: e2e Test
+        run: npm run test:e2e
+
+      - name: Run move_file.sh
+        run: |
+          sh move_file.sh
+          cd ..
+
+
+      - name: Install Dependencies
+        run: |
+          cd spore-sdk
+          npm install
+
+      - name: Run Dev Test
+        run: |
+          cd packages/core
+          npm run test:dev
