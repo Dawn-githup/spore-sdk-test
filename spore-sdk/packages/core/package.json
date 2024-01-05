@@ -1,0 +1,45 @@
+{
+  "name": "@spore-sdk/core",
+  "version": "0.1.0-beta.14",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+    "clean": "pnpm run clean:cache & pnpm run clean:build",
+    "clean:build": "rimraf lib && pnpm run clean:buildinfo",
+    "clean:buildinfo": "rimraf tsconfig.*tsbuildinfo",
+    "clean:cache": "rimraf .turbo"
+  },
+  "main": "lib",
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@ckb-lumos/base": "^0.21.1",
+    "@ckb-lumos/bi": "^0.21.1",
+    "@ckb-lumos/codec": "^0.21.1",
+    "@ckb-lumos/common-scripts": "^0.21.1",
+    "@ckb-lumos/config-manager": "^0.21.1",
+    "@ckb-lumos/lumos": "^0.21.1",
+    "@ckb-lumos/rpc": "^0.21.1",
+    "@exact-realty/multipart-parser": "^1.0.9",
+    "lodash": "^4.17.21",
+    "whatwg-mimetype": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/whatwg-mimetype": "^3.0.0",
+    "vitest": "^1.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sporeprotocol/spore-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sporeprotocol/spore-sdk/issues"
+  }
+}
