@@ -58,7 +58,9 @@ jobs:
           cd ..
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          cd spore_devenv
+          npm install
 
       - name: Build Lumos
         run: npm run build:lumos
