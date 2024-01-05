@@ -29,15 +29,20 @@ jobs:
 
       - name: Install Cross in spore-contract directory
         run: |
+          sleep 2
           cd spore_devenv
+          sleep 1
           cd spore-contract
           cargo install cross --git https://github.com/cross-rs/cross
 
       - name: Install Capsule in spore-contract directory
-        run: cargo install ckb-capsule --git https://github.com/nervosnetwork/capsule.git --tag v0.10.2
+        run: |
+          sleep 2
+          cargo install ckb-capsule --git https://github.com/nervosnetwork/capsule.git --tag v0.10.2
 
       - name: Build contracts
         run:
+          sleep 2
           capsule build --release
           cd ..
 
