@@ -21,7 +21,7 @@ rm -rf spore-devconfig
 echo "Configuration files updated successfully!"
 
 # Path to spore-sdk/package.json
-package_json_path="spore-sdk/package.json"
+package_json_path="spore-sdk/packages/core/package.json"
 
 # Check if package.json file exists
 if [ ! -f "$package_json_path" ]; then
@@ -35,11 +35,10 @@ if grep -q '"test:dev"' "$package_json_path"; then
   exit 1
 else
   # Use awk for more reliable text processing
-  awk '/"test": "turbo run test",/ { print; print "    \"test:dev\": \"cross-env NODE_ENV=development vitest\","; next }1' "$package_json_path" > "$package_json_path.tmp"
+  awk '/"test": "vitest",/ { print; print "    \"test:dev\": \"cross-env NODE_ENV=development vitest\","; next }1' "$package_json_path" > "$package_json_path.tmp"
   mv "$package_json_path.tmp" "$package_json_path"
   echo "The \"test:dev\" script has been added to package.json."
 fi
-
 
 # Path to spore-sdk/packages/core/package.json
 core_package_json_path="spore-sdk/packages/core/package.json"
