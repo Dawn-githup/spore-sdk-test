@@ -104,5 +104,6 @@ jobs:
 
       - name: Run Dev Test
         run: |
-          cd packages/core
+          cd packages
+          cd core
           npm run test:dev
